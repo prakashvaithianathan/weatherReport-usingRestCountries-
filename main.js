@@ -6,11 +6,13 @@ let body = document.querySelector("body");
 let imageContainer = document.createElement("div");
 imageContainer.setAttribute("class", "container");
 body.appendChild(imageContainer);
-
+const spinner = document.querySelector('#spinner');
 const url = "https://restcountries.eu/rest/v2/all";
 
 const result = async () => {
+  spinner.style.display ='block';
   try {
+    
     const data = await fetch(url);
     const dataJson = await data.json();
 
@@ -19,7 +21,7 @@ const result = async () => {
       card.setAttribute("class", "card");
       card.style = "width:18rem";
       imageContainer.appendChild(card);
-
+      spinner.style.display ='none';
       //!card heading
       let cardHeading = document.createElement("h4");
       cardHeading.setAttribute("class", "hh4");
@@ -180,8 +182,10 @@ const result = async () => {
         const lat = element.latlng[0];
         const lon = element.latlng[1];
          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=c1d2b2fb256cb2b6a1fbdfe39412ebb3`;
+  
          fetch(url)
          .then((data)=>{
+
              return data.json(); 
          })
          .then((result)=>{
