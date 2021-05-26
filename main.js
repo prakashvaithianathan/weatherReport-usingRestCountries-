@@ -171,10 +171,10 @@ const result = async () => {
 
       checkWeather.addEventListener("click", function () {
 
-        setTimeout(function(){
-          spinnerBorder.style.display ="none";
-          weatherCon.style.display="grid";
-        },2000)
+        // setTimeout(function(){
+        //   spinnerBorder.style.display ="none";
+        //   weatherCon.style.display="grid";
+        // },1000)
 
         
 
@@ -185,10 +185,12 @@ const result = async () => {
   
          fetch(url)
          .then((data)=>{
-
+          spinnerBorder.style.display ="block";
              return data.json(); 
          })
          .then((result)=>{
+          spinnerBorder.style.display ="none";
+            weatherCon.style.display="grid";
              const temp = result.main.temp-273.15;
              countryWeatherTemperature.innerHTML=`${temp.toFixed(2)} °C`;
              const weatherDesc = result.weather[0].description;
