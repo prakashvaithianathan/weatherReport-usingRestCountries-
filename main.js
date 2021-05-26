@@ -174,7 +174,7 @@ const result = async () => {
         setTimeout(function(){
           spinnerBorder.style.display ="none";
           weatherCon.style.display="grid";
-        },1000)
+        },2000)
 
         
 
