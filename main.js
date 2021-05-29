@@ -202,7 +202,7 @@ const result = async () => {
          })
       });
       document.addEventListener('click',function(){
-        spinnerBorder.style.display="flex";
+        spinnerBorder.style.display="block";
         weatherCon.style.display="none";
       })
     });
