@@ -1,6 +1,4 @@
-const request = new XMLHttpRequest();
-request.open("GET", "https://restcountries.eu/rest/v2/all", true);
-request.send();
+
 
 let body = document.querySelector("body");
 let imageContainer = document.createElement("div");
