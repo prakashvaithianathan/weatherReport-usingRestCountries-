@@ -1,4 +1,6 @@
-
+const request = new XMLHttpRequest();
+request.open("GET", "https://restcountries.eu/rest/v2/all", true);
+request.send();
 
 let body = document.querySelector("body");
 let imageContainer = document.createElement("div");
@@ -85,7 +87,7 @@ const result = async () => {
       //!latLongRight
       let latLongRight = document.createElement("b");
       latLongRight.setAttribute("class", "latLongRight");
-      latLongRight.innerHTML = element.latlng[0] + "," + element.latlng[1];
+      latLongRight.innerHTML = element.latlng[0] +"° N"+ ", " + element.latlng[1]+"° E";
       thirdRow.appendChild(latLongRight);
 
       //TODO: 4th currency
@@ -126,12 +128,34 @@ const result = async () => {
       let currencyData = element.currencies;
       let currencyLength = currencyData.length;
 
-      //?you can use like this, this is another method
-      // element.currencies.map((a,i)=>{
-      // return a.name;
-      //  });
 
-      if (currencyData.length > 0) {
+      //?you can use like this, this is another method
+
+      
+
+          // element.currencies.forEach((a,i)=>{   
+
+          //   let dynamicTR = document.createElement("tr");
+          // tbody.appendChild(dynamicTR);
+
+          // let codeTd = document.createElement("td");
+          // dynamicTR.appendChild(codeTd);
+          // codeTd.innerHTML = a.code;
+
+          //   let nameTd = document.createElement("td");
+          //   dynamicTR.appendChild(nameTd);
+          //   nameTd.innerHTML = a.name;
+
+
+          //   let symbolTd = document.createElement("td");
+          //   dynamicTR.appendChild(symbolTd);
+          //   symbolTd.innerHTML = a.symbol;
+  
+          //     });
+           
+
+
+      
         for (let i = 0; i < currencyData.length; i++) {
           let dynamicTR = document.createElement("tr");
           tbody.appendChild(dynamicTR);
@@ -143,13 +167,12 @@ const result = async () => {
           let nameTd = document.createElement("td");
           dynamicTR.appendChild(nameTd);
           nameTd.innerHTML = currencyData[i].name;
-
           //symbol
           let symbolTd = document.createElement("td");
           dynamicTR.appendChild(symbolTd);
           symbolTd.innerHTML = currencyData[i].symbol;
         }
-      }
+      
 
       const checkWeather = document.createElement("button");
       checkWeather.setAttribute("class", "btn btn-primary");
@@ -184,11 +207,13 @@ const result = async () => {
          fetch(url)
          .then((data)=>{
           spinnerBorder.style.display ="block";
+          
              return data.json(); 
          })
          .then((result)=>{
-          spinnerBorder.style.display ="none";
+          
             weatherCon.style.display="grid";
+            spinnerBorder.style.display ="none";
              const temp = result.main.temp-273.15;
              countryWeatherTemperature.innerHTML=`${temp.toFixed(2)} °C`;
              const weatherDesc = result.weather[0].description;
@@ -201,9 +226,10 @@ const result = async () => {
             console.log("fetch error");
          })
       });
+      
       document.addEventListener('click',function(){
-        spinnerBorder.style.display="flex";
-        //weatherCon.style.display="none";
+        spinnerBorder.style.display="block";
+        weatherCon.style.display="none";
       })
     });
   } catch (err) {
